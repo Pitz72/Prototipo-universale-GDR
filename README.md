@@ -23,9 +23,9 @@ L'obiettivo finale è duplice:
 *   **Prototipazione Rapida**: L'obiettivo è creare un *core loop* di gioco funzionante, concentrandosi sulle meccaniche fondamentali prima di passare agli aspetti grafici e narrativi estesi.
 *   **Open Source**: Il codice e la documentazione di questo prototipo sono aperti, con l'intento di condividere il processo di sviluppo e raccogliere feedback.
 
-## Stato Attuale: `v0.1.2 - 'Modular Foundation'`
+## Stato Attuale: `v0.2.0 - 'Starbound Arsenal'` ✨
 
-Il progetto ha completato le fondamenta solide e definito una metodologia di sviluppo modulare scalabile:
+Il progetto ha completato il sistema oggetti completo e consolidato la metodologia di sviluppo modulare:
 
 *   **Modulo 1: Regole Fondamentali (UCS - Universal Core System)**
     *   Definizione di attributi, abilità e meccaniche di risoluzione delle azioni (tiri di dado vs Classe Difficoltà).
@@ -42,11 +42,18 @@ Il progetto ha completato le fondamenta solide e definito una metodologia di svi
     *   Suite di test anti-regressione per mantenere la qualità del codice durante lo sviluppo.
     *   File di configurazione Godot completo con autoload configurati.
 
+*   **Modulo 3: Item Database - "Starbound Arsenal"** 🌟
+    *   Sistema completo gestione oggetti sci-fi con 8 categorie tematiche (150+ oggetti catalogati).
+    *   Classi specializzate: ItemDefinition, UsableItem, TechEquipment, WeaponItem, ProtectionItem.
+    *   Sistema inventario avanzato con gestione peso, stacking automatico e segnali eventi.
+    *   Integrazione seamless con CharacterSheet e SkillDefinition per bonus abilità.
+    *   Filosofia Confederation: focus su esplorazione, diplomazia e collaborazione scientifica.
+
 *   **Metodologia di Sviluppo Modulare Indipendente**
-    *   Framework completo per sviluppo assistito da IA ottimizzato per memoria contestuale.
-    *   Principio "Un Modulo, Una Sessione" per massima focalizzazione dell'LLM.
-    *   Template riproducibile e linee guida operative per nuovi moduli.
-    *   Struttura preparata per Modulo 3 (Item Database) con documentazione specifica.
+    *   Framework completo per sviluppo assistito da IA **validato con successo**.
+    *   Principio "Un Modulo, Una Sessione" applicato con successo al Modulo 3.
+    *   Template riproducibile e linee guida operative **testate e consolidate**.
+    *   Processo anti-regressione e tracciamento progressi implementato.
 
 ## Come Contribuire
 
@@ -54,11 +61,12 @@ Il progetto è in una fase iniziale. Feedback, idee e suggerimenti sono sempre b
 
 ## Roadmap Futura
 
-### 🎯 **v0.2.0 - "Item Arsenal"** (Prossima Release)
-*   **Modulo 3: Item Database**: Sistema completo oggetti sci-fi (armi laser, scudi energetici, equipaggiamento tecnologico).
-*   **Sviluppo Modulare Indipendente**: Prima applicazione della metodologia definita.
+### 🎯 **v0.3.0 - "Tactical Nexus"** (Prossima Release)
+*   **Modulo 4: Combat System**: Sistema combattimento tattico a turni su griglia.
+*   **Integrazione Item System**: Uso armi, armature e oggetti nel combattimento.
+*   **Sistema Stress e Fatigue**: Meccaniche avanzate per missioni prolungate.
 
 ### 🔮 **Versioni Future**
-*   **v0.3.0**: Modulo 4 - Combat System (Sistema combattimento tattico a turni su griglia).
-*   **v0.4.0**: Modulo 5 - AI Director (Sistema narrativo procedurale).
-*   **v0.5.0**: Integration Release (Integrazione moduli e demo completo).
+*   **v0.4.0 - "Narrative Engine"**: Modulo 5 - AI Director (Sistema narrativo procedurale).
+*   **v0.5.0 - "Galactic Unity"**: Integration Release (Integrazione completa moduli e demo giocabile).
+*   **v1.0.0 - "Confederation Rising"**: Prima release stabile con campagna completa.
