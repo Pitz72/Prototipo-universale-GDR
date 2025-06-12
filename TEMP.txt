@@ -1,0 +1,134 @@
+### **Schema di Progettazione Dettagliato: Modulo 4 - Sistema di Combattimento Tattico (SCT)**
+
+#### **1. Filosofia di Combattimento**
+
+*   **Il Confronto è l'Ultima Risorsa:** Il sistema deve premiare l'ingegno tattico, non la forza bruta. L'obiettivo spesso non sarà l'annientamento totale, ma il raggiungimento di un obiettivo: disattivare un dispositivo, soccorrere un PNG, raggiungere una zona di estrazione, o neutralizzare (non necessariamente uccidere) il leader nemico.
+*   **Ruoli e Sinergie:** Ogni personaggio, con le sue abilità e il suo equipaggiamento (definiti nei Moduli 1, 2 e 3), deve avere un ruolo tattico preciso. L'ingegnere che sabota le coperture nemiche è tanto importante quanto l'ufficiale della sicurezza che fornisce fuoco di soppressione.
+*   **Ambiente Interattivo:** La mappa non è solo uno sfondo. È uno strumento. Le console possono essere hackerate per creare distrazioni, le porte possono essere sigillate, i generatori possono essere sovraccaricati per creare esplosioni EMP.
+
+#### **2. Struttura Fondamentale del Combattimento**
+
+*   **Griglia di Gioco:**
+    *   **Tipo:** Griglia quadrata. È più semplice da implementare in 2D/isometrica rispetto a quella esagonale e più intuitiva per calcolare coperture e linee di vista.
+    *   **Dimensione Cella:** Ogni cella rappresenta circa 1.5x1.5 metri.
+    *   **Dati Cella:** Ogni cella della mappa deve contenere informazioni cruciali:
+        *   `is_walkable`: `bool` (se un personaggio può occuparla).
+        *   `cover_value_north`, `_south`, `_east`, `_west`: `int` (0=nessuna, 1=bassa, 2=alta). Questo permette a un singolo oggetto (es. una cassa) di fornire coperture diverse a seconda della direzione da cui proviene il fuoco.
+        *   `occupant`: Riferimento all'unità che occupa la cella.
+        *   `environment_effect`: Es. "in fiamme", "elettrificata".
+
+*   **Gestione dei Turni:**
+    *   **Sistema a Fasi:**
+        1.  **Fase Giocatore:** Il giocatore muove e fa agire tutte le sue unità, nell'ordine che preferisce.
+        2.  **Fase Nemico (IA):** L'IA muove e fa agire tutte le sue unità.
+        3.  **(Opzionale) Fase Alleati/Civili:** Eventuali PNG neutrali o alleati agiscono.
+    *   **Iniziativa:** All'inizio del combattimento, l'ordine di azione *all'interno di una singola unità* non è rilevante (il giocatore sceglie chi muovere), ma l'**Iniziativa** (calcolata dal Modulo 2: `Mod DES`) determina chi agisce per primo in caso di azioni speciali come l'Overwatch.
+
+*   **Punti Azione (PA) - Stile X-COM Moderno:**
+    *   Ogni unità ha **2 Punti Azione** per turno.
+    *   Le azioni hanno un costo in PA:
+        *   **Movimento Standard (Azione Blu):** Muoversi fino a metà della propria velocità massima. Costa 1 PA. Si può ancora eseguire un'altra azione.
+        *   **Scatto (Azione Gialla):** Muoversi fino alla propria velocità massima. Costa 2 PA e termina il turno dell'unità.
+        *   **Azione Standard (Attacco, Uso Abilità/Oggetto):** Costa 1 o 2 PA a seconda dell'azione. Un attacco standard costa 1 PA. Azioni più potenti (es. un attacco ad area di un'arma pesante) possono costare 2 PA.
+    *   Questa semplicità (massimo 2 azioni) rende il turno di ogni unità veloce e tattico.
+
+#### **3. Azioni di Combattimento Fondamentali**
+
+*   **Movimento:**
+    *   Click su una cella valida mostra il percorso.
+    *   L'interfaccia deve visualizzare chiaramente il raggio di movimento standard (es. in blu) e il raggio di scatto (es. in giallo).
+    *   Il movimento attraverso "terreno difficile" (es. macerie, acqua bassa) costa più "punti movimento" per cella.
+
+*   **Attacco:**
+    *   **Formula di Successo Colpo (To-Hit):**
+        `% Successo = MiraBase - MalusCopertura + BonusDistanza + AltriMod`
+        *   `MiraBase`: Una statistica del personaggio, derivata dall'abilità con l'arma (`Armi Leggere`/`Pesanti`) + `Mod DES`. Esempio: `65 (base) + (GradoAbilità * 3) + ModDES`.
+        *   `MalusCopertura`:
+            *   Copertura Bassa (Half Cover): **-20%** alla mira del tiratore.
+            *   Copertura Alta (Full Cover): **-40%** alla mira del tiratore.
+        *   `Bonus/Malus Distanza`: Le armi hanno una gittata ottimale. Sparare troppo da vicino (es. con un fucile di precisione) o troppo lontano (es. con una pistola) applica un malus.
+        *   `AltriMod`: Bonus per "mira stabilizzata" (+10%), malus per "fuoco di soppressione" (-15%), etc.
+    *   **Danno:** Se il colpo va a segno, il danno viene calcolato in base all'arma (Modulo 3), ridotto dalle protezioni del bersaglio.
+    *   **Critici:** Un colpo a segno ha una probabilità di essere critico (es. 10% base + bonus da flanking), infliggendo danno extra.
+
+*   **Guardia (Overwatch):**
+    *   **Costo:** 2 PA. Termina il turno.
+    *   **Funzionamento:** L'unità entra in uno stato di allerta. Il primo nemico che si muove o compie un'azione all'interno della linea di vista dell'unità subirà un attacco di reazione.
+    *   **Malus Mira:** L'attacco in Overwatch ha un malus alla mira (es. -15%), perché è un tiro di reazione.
+    *   **Interruzione:** L'Overwatch termina dopo il primo attacco.
+
+*   **Ricarica:**
+    *   **Costo:** 1 PA.
+    *   **Funzionamento:** Ricarica l'arma del personaggio se ha le munizioni/cariche nell'inventario.
+
+*   **Rannicchiarsi (Hunker Down):**
+    *   **Costo:** 2 PA. Termina il turno.
+    *   **Funzionamento:** L'unità si rannicchia dietro la copertura, raddoppiando il suo bonus difensivo e diventando immune ai colpi critici da quella direzione. Non può compiere azioni di reazione (Overwatch).
+
+#### **4. Meccaniche Tattiche Avanzate (Stile Sci-Fi "Star Trek")**
+
+Qui ci discostiamo dal puro combattimento e introduciamo l'ingegno.
+
+*   **Scansionare (Azione dello Scanner Multifunzione):**
+    *   **Costo:** 1 PA.
+    *   **Funzionamento:** Esegue una scansione su un bersaglio (nemico o oggetto).
+        *   **Su Nemico:** Rivelale sue statistiche (PF, armatura, armi), applica un leggero malus alla sua difesa per un turno (il bersaglio è "analizzato") e aumenta la probabilità di colpo critico contro di lui. Richiede una prova di `Indagare` o `Scienze`.
+        *   **Su Oggetto Interattivo (es. Console):** Rivela le opzioni di interazione (es. "Sovraccarica", "Disattiva Torretta").
+
+*   **Hacking/Ingegneria Remota (Azione dello Strumento Multifunzione):**
+    *   **Costo:** 1-2 PA.
+    *   **Funzionamento:** Permette di interagire a distanza con oggetti ambientali scansionati.
+        *   Esempi: Disattivare la copertura energetica di un nemico, far esplodere un condotto di plasma vicino a un gruppo di avversari, spegnere le luci in un'area per favorire la furtività.
+        *   Richiede una prova di `Informatica` o `Ingegneria` contro una CD.
+
+*   **Supporto Medico (Azione del Kit Medico):**
+    *   **Costo:** 1 PA.
+    *   **Funzionamento:** Usa una carica del kit medico per curare un alleato adiacente. Può anche stabilizzare un compagno a terra (a 0 PF) per impedirgli di morire. Richiede una prova di `Medicina`.
+
+*   **Fuoco di Soppressione (Abilità Arma Pesante):**
+    *   **Costo:** 2 PA, consuma più munizioni.
+    *   **Funzionamento:** Bersaglia un nemico. Non punta a colpirlo, ma a tenerlo bloccato. Il tiro per colpire è automatico, ma non infligge danno. Il bersaglio subisce lo stato "Soppresso": non può muoversi e subisce un forte malus alla mira fino al suo prossimo turno. Se tenta di muoversi, subisce un attacco di reazione.
+
+#### **5. Implementazione Tecnica in Godot (Proposta)**
+
+*   **`CombatManager.gd` (Singleton o Nodo di Scena):**
+    *   Gestisce lo stato del combattimento (Fase Attuale, Turno Corrente).
+    *   Contiene la lista di tutte le unità in combattimento (`player_units`, `enemy_units`).
+    *   Orchestra il flusso del turno: chiama `start_player_turn()`, poi `start_enemy_turn()`, etc.
+
+*   **`Grid.gd` (Nodo TileMap o GridMap):**
+    *   Gestisce la griglia di gioco.
+    *   Contiene funzioni per il pathfinding (A* integrato in Godot).
+    *   Fornisce metodi come `get_cover_from(position, direction)` per calcolare la copertura.
+
+*   **`Unit.gd` (Nodo CharacterBody2D/3D):**
+    *   Lo script base per ogni personaggio in combattimento.
+    *   Contiene un riferimento al suo `CharacterSheet` (Modulo 2).
+    *   Gestisce i suoi Punti Azione correnti.
+    *   Contiene la logica per le azioni: `move_to(path)`, `attack(target)`, `enter_overwatch()`.
+
+*   **`Action.gd` (Risorsa Personalizzata):**
+    *   Potenzialmente, ogni abilità/azione può essere una risorsa `Resource`.
+        *   `action_name`: "Sparare"
+        *   `ap_cost`: 1
+        *   `requires_target`: `true`
+        *   Contiene la logica per eseguire l'azione e per verificare se può essere eseguita. Questo rende il sistema estremamente espandibile: per aggiungere una nuova abilità, basta creare una nuova risorsa.
+
+#### **6. Piano di Sviluppo del Prototipo**
+
+1.  **Fase 1 (Base Funzionante):**
+    *   Implementare la griglia e il movimento basato su PA.
+    *   Implementare l'azione di Attacco base con la formula To-Hit e le coperture.
+    *   Creare un `CombatManager` che gestisca un semplice ciclo di turni Giocatore/Nemico.
+    *   L'IA nemica per ora si limita a muoversi e attaccare il bersaglio più vicino.
+
+2.  **Fase 2 (Aggiungere Profondità Tattica):**
+    *   Implementare Overwatch e Rannicchiarsi.
+    *   Implementare il sistema di Inventario/Ricarica in combattimento.
+
+3.  **Fase 3 (Sapore "Confederation"):**
+    *   Implementare le azioni Scansionare e Hacking/Ingegneria.
+    *   Aggiungere oggetti ambientali interattivi sulla mappa di prova.
+    *   Migliorare l'IA nemica per farle usare le coperture in modo intelligente.
+
+Questo schema ti fornisce una roadmap completa. Puoi iniziare dalla Fase 1 per avere un prototipo giocabile il prima possibile, per poi aggiungere progressivamente le altre meccaniche.

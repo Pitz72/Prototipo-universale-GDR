@@ -54,6 +54,17 @@ Questa suite di test anti-regressione definisce i controlli necessari per valida
 | TR-015 | Formattazione BBCode | Verificare output dei test | Testo colorato, grassetto, separatori visibili | ⏳ |
 | TR-016 | Scroll dei Risultati | Eseguire più test consecutivi | ScrollContainer permette di vedere tutti i risultati | ⏳ |
 
+### 🧪 **TEST GROUP 5: Combat Grid (Modulo 4)**
+
+**Pre-requisiti:** Scena `test_combat_grid.tscn` in esecuzione
+
+| Test ID | Descrizione | Procedura | Risultato Atteso | Status |
+|---------|-------------|-----------|------------------|---------|
+| TR-017 | Caricamento CombatGrid | Aprire test_combat_grid.tscn | Griglia inizializzata senza errori, 80 celle | ⏳ |
+| TR-018 | Gestione Dati Cella | Eseguire test gestione celle | Dati cella modificabili e persistenti | ⏳ |
+| TR-019 | Sistema Coperture | Eseguire test coperture | Calcolo malus mira corretto (20/40 per copertura) | ⏳ |
+| TR-020 | Validazione Posizioni | Eseguire test posizioni | Posizioni valide/non valide identificate correttamente | ⏳ |
+
 ## Test Automatizzati (Futuri)
 
 ### 📝 **Promemoria per Implementazione Futura**
@@ -105,6 +116,7 @@ Prima di ogni commit importante, eseguire questa checklist rapida:
 | 2025-06-12 | v0.1.1 | Utente + AI | ✅ **TUTTI TEST SUPERATI** | Sistema UCS completamente funzionale, fallback hardcoded attivo |
 | 2025-06-12 | v0.1.2 | Consolidamento | ✅ **VERSIONE STABILE** | Foundation completa, metodologia definita, pronta per scaling |
 | 2024-12 | v0.2.0 | Starbound Arsenal | ✅ **MODULO 3 COMPLETATO** | Item Database implementato, tutti test passano, zero regressioni |
+| Gen 2025 | v0.3.0 | Tactical Nexus - Step 1 | ✅ **COMBAT GRID BASE** | CombatGrid implementato, 4 nuovi test TR-017 to TR-020, zero regressioni |
 
 ## Note per Sviluppatori
 

@@ -23,9 +23,9 @@ L'obiettivo finale è duplice:
 *   **Prototipazione Rapida**: L'obiettivo è creare un *core loop* di gioco funzionante, concentrandosi sulle meccaniche fondamentali prima di passare agli aspetti grafici e narrativi estesi.
 *   **Open Source**: Il codice e la documentazione di questo prototipo sono aperti, con l'intento di condividere il processo di sviluppo e raccogliere feedback.
 
-## Stato Attuale: `v0.2.0 - 'Starbound Arsenal'` ✨
+## Stato Attuale: `v0.2.1 - 'Grid Guardian'` ✨
 
-Il progetto ha completato il sistema oggetti completo e consolidato la metodologia di sviluppo modulare:
+Il progetto ha implementato con successo il core del sistema di combattimento tattico:
 
 *   **Modulo 1: Regole Fondamentali (UCS - Universal Core System)**
     *   Definizione di attributi, abilità e meccaniche di risoluzione delle azioni (tiri di dado vs Classe Difficoltà).
@@ -49,11 +49,17 @@ Il progetto ha completato il sistema oggetti completo e consolidato la metodolog
     *   Integrazione seamless con CharacterSheet e SkillDefinition per bonus abilità.
     *   Filosofia Confederation: focus su esplorazione, diplomazia e collaborazione scientifica.
 
+*   **Modulo 4: Combat System - "Grid Guardian"** 🛡️
+    *   CombatGrid v2: Griglia tattica 20x15 con sistema coperture direzionali.
+    *   Test suite completa: 22/22 test anti-regressione superati.
+    *   Metodologia incrementale sicura validata: zero regressioni moduli esistenti.
+    *   Foundation solida per pathfinding A*, Unit.gd e CombatManager.
+
 *   **Metodologia di Sviluppo Modulare Indipendente**
     *   Framework completo per sviluppo assistito da IA **validato con successo**.
-    *   Principio "Un Modulo, Una Sessione" applicato con successo al Modulo 3.
-    *   Template riproducibile e linee guida operative **testate e consolidate**.
-    *   Processo anti-regressione e tracciamento progressi implementato.
+    *   Principio "Un Modulo, Una Sessione" applicato con successo a Moduli 3 e 4.
+    *   Procedure anti-regressione e recovery crisis **testate in produzione**.
+    *   Template riproducibile e linee guida operative **consolidate**.
 
 ## Come Contribuire
 

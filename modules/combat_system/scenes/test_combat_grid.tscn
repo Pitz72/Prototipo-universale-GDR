@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1mhv3n2q7x8z"]
+
+[ext_resource type="Script" path="res://modules/combat_system/tests/test_combat_grid.gd" id="1_test_script"]
+
+[node name="TestCombatGridClean" type="Node"]
+script = ExtResource("1_test_script") 
