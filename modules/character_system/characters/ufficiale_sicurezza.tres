@@ -1,0 +1,21 @@
+[gd_resource type="CharacterSheet" script_class="CharacterSheet" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://modules/character_system/resources/character_sheet.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+character_name = "Ufficiale di Sicurezza"
+strength = 16
+dexterity = 14
+constitution = 15
+intelligence = 12
+wisdom = 13
+charisma = 10
+skill_ranks = {
+"res://modules/core_rules/resources/atletica.tres": 3,
+"res://modules/core_rules/resources/informatica.tres": 1
+}
+level = 1
+experience_points = 0
+max_health = 0
+current_health = 0 

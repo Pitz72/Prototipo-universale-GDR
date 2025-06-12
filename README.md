@@ -23,9 +23,9 @@ L'obiettivo finale è duplice:
 *   **Prototipazione Rapida**: L'obiettivo è creare un *core loop* di gioco funzionante, concentrandosi sulle meccaniche fondamentali prima di passare agli aspetti grafici e narrativi estesi.
 *   **Open Source**: Il codice e la documentazione di questo prototipo sono aperti, con l'intento di condividere il processo di sviluppo e raccogliere feedback.
 
-## Stato Attuale: `v0.1.0 - 'Genesis Core'`
+## Stato Attuale: `v0.1.2 - 'Modular Foundation'`
 
-Il progetto ha completato la definizione e l'implementazione delle fondamenta del sistema di gioco:
+Il progetto ha completato le fondamenta solide e definito una metodologia di sviluppo modulare scalabile:
 
 *   **Modulo 1: Regole Fondamentali (UCS - Universal Core System)**
     *   Definizione di attributi, abilità e meccaniche di risoluzione delle azioni (tiri di dado vs Classe Difficoltà).
@@ -36,12 +36,29 @@ Il progetto ha completato la definizione e l'implementazione delle fondamenta de
     *   Definizione delle formule per le statistiche derivate (Punti Ferita, Iniziativa, etc.).
     *   Creazione della risorsa `CharacterSheet.gd` per contenere tutti i dati di un personaggio in modo strutturato e accessibile dall'editor di Godot.
 
+*   **Sistema di Test e Validazione**
+    *   Scena di test interattiva con interfaccia grafica per validare tutte le meccaniche implementate.
+    *   Risorse di test complete (personaggi e abilità) per dimostrare il funzionamento del sistema.
+    *   Suite di test anti-regressione per mantenere la qualità del codice durante lo sviluppo.
+    *   File di configurazione Godot completo con autoload configurati.
+
+*   **Metodologia di Sviluppo Modulare Indipendente**
+    *   Framework completo per sviluppo assistito da IA ottimizzato per memoria contestuale.
+    *   Principio "Un Modulo, Una Sessione" per massima focalizzazione dell'LLM.
+    *   Template riproducibile e linee guida operative per nuovi moduli.
+    *   Struttura preparata per Modulo 3 (Item Database) con documentazione specifica.
+
 ## Come Contribuire
 
 Il progetto è in una fase iniziale. Feedback, idee e suggerimenti sono sempre benvenuti. È possibile aprire una *Issue* su GitHub per discutere di nuove funzionalità o segnalare problemi.
 
 ## Roadmap Futura
 
-1.  **Modulo 3: Database Oggetti**: Creazione di un sistema per definire armi, armature ed equipaggiamento.
-2.  **Modulo 4: Sistema di Combattimento**: Sviluppo di un sistema di combattimento tattico a turni su griglia.
-3.  **Creazione di Contenuti di Prova**: Sviluppo di una scena di test interattiva per validare il core loop di gioco.
+### 🎯 **v0.2.0 - "Item Arsenal"** (Prossima Release)
+*   **Modulo 3: Item Database**: Sistema completo oggetti sci-fi (armi laser, scudi energetici, equipaggiamento tecnologico).
+*   **Sviluppo Modulare Indipendente**: Prima applicazione della metodologia definita.
+
+### 🔮 **Versioni Future**
+*   **v0.3.0**: Modulo 4 - Combat System (Sistema combattimento tattico a turni su griglia).
+*   **v0.4.0**: Modulo 5 - AI Director (Sistema narrativo procedurale).
+*   **v0.5.0**: Integration Release (Integrazione moduli e demo completo).
