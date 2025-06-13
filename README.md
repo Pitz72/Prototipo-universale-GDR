@@ -23,37 +23,39 @@ L'obiettivo finale è duplice:
 *   **Prototipazione Rapida**: L'obiettivo è creare un *core loop* di gioco funzionante, concentrandosi sulle meccaniche fondamentali prima di passare agli aspetti grafici e narrativi estesi.
 *   **Open Source**: Il codice e la documentazione di questo prototipo sono aperti, con l'intento di condividere il processo di sviluppo e raccogliere feedback.
 
-## Stato Attuale: `v0.2.1 - 'Grid Guardian'` ✨
+## Stato Attuale: `v0.2.3 - 'Combat Foundation'` ⚠️
 
-Il progetto ha implementato con successo il core del sistema di combattimento tattico:
+Il progetto ha implementato il sistema di combattimento tattico completo, attualmente in fase di validazione:
 
-*   **Modulo 1: Regole Fondamentali (UCS - Universal Core System)**
+*   **Modulo 1: Regole Fondamentali (UCS - Universal Core System)** ✅
     *   Definizione di attributi, abilità e meccaniche di risoluzione delle azioni (tiri di dado vs Classe Difficoltà).
     *   Implementazione del singleton `UCS.gd` con la logica per il calcolo dei modificatori e l'esecuzione delle prove di abilità.
 
-*   **Modulo 2: Sistema del Personaggio**
+*   **Modulo 2: Sistema del Personaggio** ✅
     *   Progettazione di un sistema di creazione del personaggio flessibile (Point Buy / Standard Array).
     *   Definizione delle formule per le statistiche derivate (Punti Ferita, Iniziativa, etc.).
     *   Creazione della risorsa `CharacterSheet.gd` per contenere tutti i dati di un personaggio in modo strutturato e accessibile dall'editor di Godot.
 
-*   **Sistema di Test e Validazione**
-    *   Scena di test interattiva con interfaccia grafica per validare tutte le meccaniche implementate.
-    *   Risorse di test complete (personaggi e abilità) per dimostrare il funzionamento del sistema.
-    *   Suite di test anti-regressione per mantenere la qualità del codice durante lo sviluppo.
-    *   File di configurazione Godot completo con autoload configurati.
-
-*   **Modulo 3: Item Database - "Starbound Arsenal"** 🌟
+*   **Modulo 3: Item Database - "Starbound Arsenal"** ✅
     *   Sistema completo gestione oggetti sci-fi con 8 categorie tematiche (150+ oggetti catalogati).
     *   Classi specializzate: ItemDefinition, UsableItem, TechEquipment, WeaponItem, ProtectionItem.
     *   Sistema inventario avanzato con gestione peso, stacking automatico e segnali eventi.
     *   Integrazione seamless con CharacterSheet e SkillDefinition per bonus abilità.
     *   Filosofia Confederation: focus su esplorazione, diplomazia e collaborazione scientifica.
 
-*   **Modulo 4: Combat System - "Grid Guardian"** 🛡️
-    *   CombatGrid v2: Griglia tattica 20x15 con sistema coperture direzionali.
-    *   Test suite completa: 22/22 test anti-regressione superati.
-    *   Metodologia incrementale sicura validata: zero regressioni moduli esistenti.
-    *   Foundation solida per pathfinding A*, Unit.gd e CombatManager.
+*   **Modulo 4: Combat System - "Combat Foundation"** 🟡
+    *   **CombatGrid v2.0**: Griglia tattica 20x15 con sistema coperture direzionali (95 righe) ✅
+    *   **Unit System v1.0**: Integrazione CharacterSheet, 2 PA per turno, posizionamento grid (175 righe) ✅
+    *   **CombatManager v1.0**: Gestione turni, iniziativa DES+1d20, player/ally/enemy arrays (267 righe) ✅
+    *   **Actions Framework**: Base class per azioni combattimento, prerequisiti, cooldown (198 righe) ✅
+    *   **Test Suite**: 34 test implementati ma non validati (blockers environment) ⚠️
+    *   **Status**: Implementazione completa (1237 righe), validazione bloccata per conflitti naming/cache
+
+*   **Sistema di Test e Validazione** ⚠️
+    *   Test suite comprehensive: 34 test anti-regressione implementati.
+    *   Environment issues: Class name conflicts + cache Godot corrotta bloccano execution.
+    *   Recovery plan documentato per v0.2.4 "Validated Foundation".
+    *   Scena di test interattiva UCS funzionante (conflitto con test combat).
 
 *   **Metodologia di Sviluppo Modulare Indipendente**
     *   Framework completo per sviluppo assistito da IA **validato con successo**.
@@ -67,12 +69,20 @@ Il progetto è in una fase iniziale. Feedback, idee e suggerimenti sono sempre b
 
 ## Roadmap Futura
 
-### 🎯 **v0.3.0 - "Tactical Nexus"** (Prossima Release)
-*   **Modulo 4: Combat System**: Sistema combattimento tattico a turni su griglia.
-*   **Integrazione Item System**: Uso armi, armature e oggetti nel combattimento.
-*   **Sistema Stress e Fatigue**: Meccaniche avanzate per missioni prolungate.
+### 🚨 **v0.2.4 - "Validated Foundation"** (Priorità Immediata)
+*   **Environment Cleanup**: Risoluzione class_name conflicts e cache Godot corrotta.
+*   **Test Validation**: Esecuzione e validazione completa 34 test implementati.
+*   **Documentation Finalization**: Stato definitivo v0.2.3 e procedure recovery.
+*   **Stable Foundation**: Base solida e testata per sviluppi futuri.
+
+### 🎯 **v0.3.0 - "Tactical Actions"** (Prossima Release)
+*   **Specific Actions**: Implementazione Move, Attack, Tech actions concrete.
+*   **A* Pathfinding**: Algoritmo completo per movement su CombatGrid.
+*   **Combat Demo**: Scene giocabile con basic AI e full combat loop.
+*   **Performance Optimization**: Benchmarks e ottimizzazioni sistema.
 
 ### 🔮 **Versioni Future**
-*   **v0.4.0 - "Narrative Engine"**: Modulo 5 - AI Director (Sistema narrativo procedurale).
-*   **v0.5.0 - "Galactic Unity"**: Integration Release (Integrazione completa moduli e demo giocabile).
+*   **v0.4.0 - "Confederation Style"**: Azioni sci-fi, ambiente interattivo, sistema non-letale.
+*   **v0.5.0 - "Narrative Engine"**: Modulo 5 - AI Director (Sistema narrativo procedurale).
+*   **v0.6.0 - "Galactic Unity"**: Integration Release (Integrazione completa moduli e demo giocabile).
 *   **v1.0.0 - "Confederation Rising"**: Prima release stabile con campagna completa.

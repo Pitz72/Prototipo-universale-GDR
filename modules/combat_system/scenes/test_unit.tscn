@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6x8v0j6y5n3q"]
+
+[ext_resource type="Script" path="res://modules/combat_system/tests/test_unit.gd" id="1_2k4m3"]
+[ext_resource type="Script" path="res://modules/combat_system/src/unit.gd" id="2_3k4m3"]
+[ext_resource type="Script" path="res://modules/combat_system/tests/run_unit_tests.gd" id="3_4k4m3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 16.0
+
+[node name="TestUnit" type="Node"]
+script = ExtResource("1_2k4m3")
+
+[node name="TestUnitInstance" type="CharacterBody2D" parent="."]
+script = ExtResource("2_3k4m3")
+max_action_points = 2
+grid_position = Vector2i(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="TestUnitInstance"]
+modulate = Color(0.2, 0.6, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestUnitInstance"]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Label" type="Label" parent="TestUnitInstance"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+text = "Test Unit"
+horizontal_alignment = 1
+vertical_alignment = 1 

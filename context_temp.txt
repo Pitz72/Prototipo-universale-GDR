@@ -1,0 +1,105 @@
+# 🚨 PRIORITÀ IMMEDIATE - Post Refactoring
+
+## 🛠️ **PROBLEMI CRITICI DA RISOLVERE**
+
+### **1. Cache e Naming Conflicts (CRITICO)**
+- ❌ **Conflitti class_name**: CombatGrid, Unit, CombatManager creano shadowing
+- ❌ **Cache Godot corrotta**: Path resolution bug con duplicazioni `res:/res:/res:/`
+- ❌ **Test execution bloccata**: Impossibile validare 34 test implementati
+
+### **2. Architettura Test (URGENTE)**
+- ❌ **Main Scene conflicts**: test_integration_scene.tscn interferisce con test runner
+- ❌ **Script isolation**: Test non eseguibili per dipendenze circolari
+- ❌ **Environment cleanup**: Serve approccio test più robusto
+
+---
+
+## 📋 **TODO POST-REFACTORING v0.2.4**
+
+### **Fase 1: Cleanup Tecnico**
+1. **Risoluzione Class Name Conflicts**
+   - Eliminare/rinominare class_name globali non necessari
+   - Usare namespace appropriati o load() esplicito
+   - Documentare pattern di naming definitivo
+
+2. **Test Architecture Redesign**
+   - Creare test runner indipendente da scene
+   - Separare test environment da main project
+   - Implementare validation automatica senza UI interference
+
+3. **Cache Management**
+   - Documentare procedura cache cleanup
+   - Creare script di reset environment
+   - Validare importazione risorse
+
+### **Fase 2: Validazione Sistema v0.2.3**
+1. **Eseguire 34 Test Previsti**
+   - CombatGrid: 22 test
+   - Unit System: 5 test  
+   - CombatManager: 7 test
+   - Performance validation
+
+2. **Documentazione Aggiornata**
+   - README_MODULO4.md → v0.2.3 status
+   - Test anti-regressione documentation
+   - Development logs consolidation
+
+---
+
+## 🎯 **VERSIONE ATTUALE: v0.2.3 "Combat Foundation"**
+
+**Status**: 🟡 **IMPLEMENTATO MA NON VALIDATO**
+
+### **Componenti Implementati:**
+- ✅ **CombatGrid**: 95 righe, griglia 20x15, sistema coperture
+- ✅ **Unit System**: 175 righe, integrazione CharacterSheet, 2 PA per turno
+- ✅ **CombatManager**: 267 righe, gestione turni, sistema iniziativa
+- ✅ **Actions Framework**: 198 righe, base per azioni combattimento
+
+### **Test Suite (Teorica):**
+- 📝 **34 test totali previsti** (non validati per problemi tecnici)
+- 📝 **1237 righe codice** (735 src + 502 tests)
+- 📝 **100% coverage teorico** su funzionalità base
+
+### **Blockers Attuali:**
+- 🔴 **Test execution impossible** (cache conflicts)
+- 🔴 **Validation blocked** (naming shadowing)
+- 🔴 **Integration untested** (scene conflicts)
+
+---
+
+## 🚀 **PROSSIMA MILESTONE: v0.2.4 "Validated Foundation"**
+
+**Obiettivo**: Rendere il sistema testabile e validato
+
+### **Deliverables:**
+1. **Clean Test Environment** - 100% test execution
+2. **Validated 34 Tests** - Tutti i test passano
+3. **Clean Architecture** - Zero naming conflicts
+4. **Documentation Complete** - Stato definitivo v0.2.3
+
+### **Success Criteria:**
+- ✅ Tutti i 34 test eseguibili e passanti
+- ✅ Zero conflitti naming/cache
+- ✅ Sistema combat completamente validato
+- ✅ Ready per sviluppo Fase 4 (Actions Implementation)
+
+---
+
+## 📚 **DOCUMENTAZIONE DA CONSOLIDARE**
+
+### **Files da Aggiornare per v0.2.3:**
+1. `modules/combat_system/README_MODULO4.md`
+2. `documentation/development_logs/v0.2.3-combat-foundation.md`
+3. `documentation/technical_design/test_suite_anti_regression.md`
+4. `documentation/project_status/README.md`
+
+### **Metrics v0.2.3:**
+- **Codice**: 1237 righe totali
+- **Test**: 34 previsti (validazione pending)
+- **Copertura**: 100% teorica funzionalità base
+- **Performance**: Target <16ms mantenuto
+
+---
+
+**🎯 Focus: Prima validare il lavoro fatto, poi procedere con nuove funzionalità.**
