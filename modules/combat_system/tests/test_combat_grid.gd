@@ -7,11 +7,9 @@ extends Node
 var grid: CombatGrid
 
 func _ready():
-	# Auto-run disabilitato per evitare conflitti con altri test
-	# Decommentare per eseguire automaticamente:
-	# print("🧪 === TEST SUITE COMBAT GRID v2 AVVIATO ===")
-	# run_all_tests()
-	pass
+	# Auto-run test abilitato per validation v0.2.4
+	print("🧪 === TEST SUITE COMBAT GRID v2 AVVIATO ===")
+	run_all_tests()
 
 func run_all_tests():
 	test_grid_creation()
