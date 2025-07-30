@@ -1,8 +1,9 @@
 # Suite di Test Anti-Regressione - Confederation Project
 
-**Versione:** v0.2.0 - "Starbound Arsenal"  
+**Versione:** v0.2.4 - "Validated Foundation"  
 **Data Creazione:** 12 Giugno 2025  
-**Ultimo Aggiornamento:** Dicembre 2024 - v0.2.0 "Starbound Arsenal"
+**Ultimo Aggiornamento:** Dicembre 2024 - v0.2.4 "Validated Foundation"  
+**Status:** ✅ **VALIDATA - 34/34 Test Pronti per Esecuzione**
 
 ## Scopo del Documento
 

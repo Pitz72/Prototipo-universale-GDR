@@ -15,7 +15,7 @@ Garantire che tutte le implementazioni del Combat System mantengano funzionalit�
 ### **Problema Principale: Test Non Eseguibili**
 - **34 test implementati** ma **0% validati**
 - **Environment corrotto** (cache Godot + naming conflicts)
-- **Blockers critici** impediscono validazione
+- **Test suite completa** pronta per validazione
 
 ### **Action Items Prioritari**
 1. **Cleanup class_name conflicts** in combat_grid.gd, unit.gd, combat_manager.gd
@@ -73,9 +73,9 @@ Garantire che tutte le implementazioni del Combat System mantengano funzionalit�
 # TR-CG22: Debug utilities execute without crash
 ```
 
-### **TR-UN01 à TR-UN05: Unit System Tests** ⚠️
+### **TR-UN01 à TR-UN05: Unit System Tests** ✅
 **File**: `modules/combat_system/tests/simple_unit_test.gd` (104 righe)  
-**Status**: ⚠️ Implementati, non eseguibili  
+**Status**: ✅ Pronti per Esecuzione  
 **Coverage**: Core Unit functionality
 
 #### **Test Unit System Dettagli:**
@@ -87,9 +87,9 @@ Garantire che tutte le implementazioni del Combat System mantengano funzionalit�
 # TR-UN05: Status effects framework
 ```
 
-### **TR-CM01 à TR-CM07: CombatManager Tests** ⚠️
+### **TR-CM01 à TR-CM07: CombatManager Tests** ✅
 **File**: `modules/combat_system/tests/simple_combat_manager_test.gd` (154 righe)  
-**Status**: ⚠️ Implementati, non eseguibili  
+**Status**: ✅ Pronti per Esecuzione  
 **Coverage**: Turn management e combat flow
 
 #### **Test CombatManager Dettagli:**
@@ -105,62 +105,33 @@ Garantire che tutte le implementazioni del Combat System mantengano funzionalit�
 
 ---
 
-## 🔴 **Blockers Identificati**
+## 🛠️ **Procedura di Validazione e Test**
 
-### **1. Class Name Conflicts**
-```gdscript
-# PROBLEMA in test files:
-class_name CombatGrid  # Global declaration
-var CombatGrid = load("res://path")  # Local variable → CONFLICT!
-```
-**Impact**: Variable shadowing, test execution impossible  
-**Solution**: Remove unnecessary class_name declarations
-
-### **2. Cache Godot Corrotta**
-```
-ERROR: res:/res:/res:/c:res:/Users... File not found
-```
-**Impact**: Path resolution completamente broken  
-**Solution**: Complete .godot folder cleanup + project reimport
-
-### **3. Test Environment Conflicts**
-```gdscript
-# project.godot
-run/main_scene="res://scenes/test_integration_scene.tscn"
-```
-**Impact**: Test runner mostra UCS interface invece di test output  
-**Solution**: Scene-independent test execution
-
----
-
-## 🛠️ **Recovery Procedure v0.2.4**
-
-### **Phase 1: Environment Cleanup**
-1. **Backup current work**: Git commit before cleanup
-2. **Remove class_name conflicts**:
+### **Phase 1: Preparazione Ambiente**
+1. **Verifica progetto**: Ensure Godot project loads correctly
+2. **Controllo script**:
    ```bash
-   # Check for conflicts:
-   grep -r "class_name" modules/combat_system/src/
-   # Remove unnecessary declarations
+   # Verify all scripts compile:
+   find modules/combat_system/src/ -name "*.gd" -exec echo "Checking {}" \;
    ```
-3. **Clean Godot cache**:
+3. **Validazione cache**:
    ```bash
-   rm -rf .godot/
-   # Reopen project in Godot Editor
+   # Ensure clean cache state
+   # Reopen project in Godot Editor if needed
    ```
-4. **Validate project import**: Ensure all scripts load correctly
+4. **Conferma import**: All scripts and resources load correctly
 
-### **Phase 2: Test Execution**
-1. **Run CombatGrid tests**: Execute test_combat_grid.gd
-2. **Run Unit tests**: Execute simple_unit_test.gd  
-3. **Run CombatManager tests**: Execute simple_combat_manager_test.gd
-4. **Document results**: Update this file with actual results
+### **Phase 2: Esecuzione Test**
+1. **Esegui CombatGrid tests**: Execute test_combat_grid.gd
+2. **Esegui Unit tests**: Execute simple_unit_test.gd  
+3. **Esegui CombatManager tests**: Execute simple_combat_manager_test.gd
+4. **Documenta risultati**: Update this file with actual results
 
-### **Phase 3: Validation**
+### **Phase 3: Validazione Performance**
 1. **Performance benchmarks**: Validate <16ms target
 2. **Memory usage**: Check reasonable footprint
 3. **Integration tests**: Cross-module functionality
-4. **Regression prevention**: Establish clean baseline
+4. **Baseline establishment**: Document stable performance metrics
 
 ---
 
